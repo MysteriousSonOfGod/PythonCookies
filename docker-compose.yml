@@ -1,0 +1,59 @@
+version: '3.5'
+services:
+    odoo_redis:
+        image: ad3d692f9ff9
+        container_name: odoo_redis
+        network_mode: bridge
+
+    odoo_web:
+        image: f13f58184e56
+        container_name: odoo_web
+        command: python /opt/odoo/start.py gevent -c /opt/odoo/odoo.conf
+        depends_on:
+            - odoo_redis
+        links:
+            - odoo_redis
+        volumes:
+            - /Users/odoo/mrgong-odoo:/opt/odoo
+        ports:
+            - "8069:8069"
+        network_mode: bridge
+
+
+    odoo_cron:
+        container_name: odoo_cron
+        image: f13f58184e56
+        command: python /opt/odoo/start.py -c /opt/odoo/odoo.conf --no-xmlrpc --max-cron-threads=2
+        depends_on:
+            - odoo_web
+        links:
+            - odoo_redis
+        volumes:
+            - /Users/odoo/mrgong-odoo:/opt/odoo
+        network_mode: bridge
+
+
+    odoo_celery:
+        container_name: odoo_celery
+        image: f13f58184e56
+        command: python /opt/odoo/runwise/addons/async/tasks.py worker -A tasks -l info --odoo_config=/opt/odoo/odoo-worker.conf -c 10 --queues=celery
+        depends_on:
+            - odoo_cron
+        links:
+            - odoo_redis
+        volumes:
+            - /Users/odoo/mrgong-odoo:/opt/odoo
+        network_mode: bridge
+
+    odoo_high_celery:
+        container_name: odoo_high_celery
+        image: f13f58184e56
+        command: python /opt/odoo/runwise/addons/async/tasks.py worker -A tasks -l info --odoo_config=/opt/odoo/odoo-worker.conf -c 4 --queues=high
+        depends_on:
+            - odoo_cron
+        links:
+            - odoo_redis
+        volumes:
+            - /Users/odoo/mrgong-odoo:/opt/odoo
+        network_mode: bridge
+

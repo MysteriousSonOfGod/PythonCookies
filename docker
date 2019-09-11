@@ -1,0 +1,17 @@
+运行docker-background：
+    docker container run --name "指定容器别名" -it -d "image name or id" bash(进行bash命令)
+进入容器
+    docker exec -it  "container_id" bash
+终止容器
+    docker container kill "container_id"
+删除容器
+    docker container rm "container_id"
+复制文件（文件夹）
+docker cp [pc abs path] [container_id]: [container abs path]
+一键删除容器
+    docker container prune
+一键删除镜像
+    docker image prune
+加入集群提示命令
+    docker swarm join-token worker
+volumes不能有空格

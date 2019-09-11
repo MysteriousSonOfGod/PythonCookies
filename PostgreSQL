@@ -1,0 +1,5 @@
+create user user_name with nosuperuser nocreatedb nocreaterole noinherit noreplication nobypassrls password 'password';
+psql -U postgres -d db_name
+--alter user user_name set default_transaction_read_only=on; /*登录指定数据库 db_name 只读模式*/
+grant select on table_name to uase_name; /*权限赋予用户对表的权限，CRUD*/
+grant update(field) on table_name to user_name; /*赋予表某个字段特殊的权限*/

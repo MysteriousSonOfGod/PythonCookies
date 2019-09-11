@@ -1,0 +1,12 @@
+安装过程
+CentOS
+sudo yum install libcurl-devel
+python3 -m pip install -i https://pypi.douban.com/simple/  pycurl --global-option="--with-nss"
+python3 -m pip install -i https://pypi.douban.com/simple/ wsgidav
+python3 -m pip install -i https://pypi.douban.com/simple/ pyspider
+
+Ubuntu
+sudo apt install libssl-dev libcurl4-openssl-dev python(3)-dev
+python3 -m pip install -i https://pypi.douban.com/simple/ pycurl --global-option="--with-nss"
+python3 -m pip install -i https://pypi.douban.com/simple/ wsgidav
+python3 -m pip install -i https://pypi.douban.com/simple/ pyspider

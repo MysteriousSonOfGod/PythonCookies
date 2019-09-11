@@ -1,0 +1,26 @@
+from matplotlib.pylab import plot, show, figure, subplot
+
+data = genfromtxt('iris.csv', delimiter=',', usecols=(0, 1, 2, 3))
+target = genfromtxt('iris.csv', delimiter=',', usecols=(4,), dtype=str)
+
+figure(1)
+plot(data[target == 'setosa', 0], data[target == 'setosa', 2], 'bo')
+plot(data[target == 'versicolor', 0], data[target == 'versicolor', 2], 'ro')
+plot(data[target == 'virginica', 0], data[target == 'virginica', 2], 'go')
+
+xmin = min(data[:, 0])
+xmax = max(data[:, 0])
+figure(2)
+subplot(4, 1, 1)
+hist(data[target == 'setosa', 0], color='b')
+xlim(xmin, xmax)
+subplot(4, 1, 2)
+hist(data[target == 'versicolor', 0], color='r')
+xlim(xmin, xmax)
+subplot(4, 1, 3)
+hist(data[target == 'virginica', 0], color='g')
+xlim(xmin, xmax)
+subplot(4, 1, 4)
+hist(data[:, 0], color='y')
+xlim(xmin, xmax)
+show()

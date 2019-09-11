@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NOTES</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+{%- block topbar -%}
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <h2>
+              <a href="/" class="brand">Home</a>
+          </h2>
+        </div>
+      </div>
+    </div>
+    {%- endblock -%}
+    <div class="container">
+      <div class="content">
+        {% block page_header %}{% endblock %}
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    {% block js_footer %}{% endblock %}
+</body>
+</html>
